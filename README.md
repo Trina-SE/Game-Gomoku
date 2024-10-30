@@ -1,7 +1,7 @@
 # Game-Gomoku
 # Team: AI-dle
 
-Game description: Gomoku
+<b>Game description:</b><br>
 Gomoku, also known as "five in a row", is a board game similar to tic-tac-toe but on a
 larger board. It is a two-player, fully observable, deterministic, zero-sum game. Players take
 turn in placing ‘stone’s in the board until one player can connect five stones of the same
