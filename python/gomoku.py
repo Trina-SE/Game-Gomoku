@@ -6,7 +6,7 @@ class WinCheck:
     def __init__(self, board):
         self.board = board
 
-    def __check_row(self, color):
+    def checkRow(self, color):
         neg_color = 1 if color == 2 else 2
         for i in range(self.board.size):
             for j in range(self.board.size - 4):
@@ -18,7 +18,7 @@ class WinCheck:
                     return True
         return False
 
-    def __check_col(self, color):
+    def checkCol(self, color):
         neg_color = 1 if color == 2 else 2
         for i in range(self.board.size - 4):
             for j in range(self.board.size):
@@ -30,7 +30,7 @@ class WinCheck:
                     return True
         return False
 
-    def __check_diagonal(self, color):
+    def checkDiagonal(self, color):
         neg_color = 1 if color == 2 else 2
         for i in range(self.board.size - 4):
             for j in range(self.board.size - 4):
@@ -47,12 +47,12 @@ class WinCheck:
                     return True
         return False
 
-    def check_win(self, color):
-        if self.__check_row(color):
+    def checkWin(self, color):
+        if self.checkRow(color):
             return True
-        if self.__check_col(color):
+        if self.checkCol(color):
             return True
-        if self.__check_diagonal(color):
+        if self.checkDiagonal(color):
             return True
         return False
 
@@ -66,7 +66,7 @@ class Board:
             self.matrix = numpy.zeros((size,size))
         self.size = self.matrix.shape[0]
 
-    # def __check_row(self, color):
+    # def checkRow(self, color):
     #     neg_color = 1 if color == 2 else 2
     #     for i in range(self.size):
     #         for j in range(self.size-4):
@@ -78,7 +78,7 @@ class Board:
     #                 return True
     #     return False
     
-    # def __check_col(self, color):
+    # def checkCol(self, color):
     #     neg_color = 1 if color == 2 else 2
     #     for i in range(self.size-4):
     #         for j in range(self.size):
@@ -90,7 +90,7 @@ class Board:
     #                 return True
     #     return False
 
-    # def __check_diagonal(self, color):
+    # def checkDiagonal(self, color):
     #     neg_color = 1 if color == 2 else 2
     #     for i in range(self.size-4):
     #         for j in range(self.size-4):
@@ -107,15 +107,45 @@ class Board:
     #                 return True
     #     return False
 
-    # def check_win(self, color):
-    #     if self.__check_row(color):
+    # def checkWin(self, color):
+    #     if self.checkRow(color):
     #         return True
-    #     if self.__check_col(color):
+    #     if self.checkCol(color):
     #         return True
-    #     if self.__check_diagonal(color):
+    #     if self.checkDiagonal(color):
     #         return True
     #     return False
 
     
-    
+    def generateMoves(self):
+        moves = []
+        for i in range(self.size):
+            for j in range(self.size):
+                if self.matrix[i, j] > 0:
+                    continue
+                if i > 0:
+                    if j > 0:
+                        if self.matrix[i-1][j-1] > 0 or self.matrix[i][j-1] > 0:
+                            moves.append((i, j))
+                            continue
+                    if j < self.size - 1:
+                        if self.matrix[i-1][j+1] > 0 or self.matrix[i][j+1] > 0:
+                            moves.append((i, j))
+                            continue
+                    if self.matrix[i-1][j] > 0:
+                        moves.append((i, j))
+                        continue
+                if i < self.size - 1:
+                    if j > 0:
+                        if self.matrix[i+1][j-1] > 0 or self.matrix[i][j-1] > 0:
+                            moves.append((i, j))
+                            continue
+                    if j < self.size - 1:
+                        if self.matrix[i+1][j+1] > 0 or self.matrix[i][j+1] > 0:
+                            moves.append((i, j))
+                            continue
+                    if self.matrix[i+1][j] > 0:
+                        moves.append((i, j))
+                        continue
+        return moves
 
