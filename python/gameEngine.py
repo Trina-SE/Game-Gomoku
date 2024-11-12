@@ -1,3 +1,6 @@
+import time
+import math
+
 from gameBoard import Board
 from wincheck import WinCheck
 
@@ -146,11 +149,11 @@ class GameEngine:
         return sorted(allMoves, key=lambda move: customFunc(board, move), reverse=True)
 
     @classmethod
-    def minimax_alphabeta(cls, board: Board, depth, alpha, beta, is_max):
+    def minimax_alphabeta(cls, board: Board, depth, alpha, beta, isMax):
         if depth == 0:
             return (cls.evaluateBoard(board, not isMax), None)
 
-        allPossibleMoves = board.generate_moves()
+        allPossibleMoves = board.generateMoves()
         allPossibleMoves = cls.heuristic_sort(board, allPossibleMoves)
 
         if len(allPossibleMoves) == 0:
@@ -189,7 +192,7 @@ class GameEngine:
 
     @classmethod
     def searchWinningMove(cls, board: Board):
-        allPossibleMoves = board.generate_moves()
+        allPossibleMoves = board.generateMoves()
 
         for move in allPossibleMoves:
             tempBoard = Board(board=board)
