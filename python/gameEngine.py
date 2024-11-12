@@ -67,7 +67,7 @@ class GameEngine:
     
     @classmethod
     def getScore(cls, board: Board, isBlack: bool, isBlackTurn: bool):
-        patternDict = {}
+        patternDict = {} #{key:value} #count of occurrences of a pattern
         cls.getPatternsRow(board, patternDict, isBlack)
         cls.getPatternsCol(board, patternDict, isBlack)
         cls.getPatternsDiagonal(board, patternDict, isBlack)
@@ -134,7 +134,7 @@ class GameEngine:
         return move
 
     @classmethod
-    def heuristic_sort(cls, board, allMoves):
+    def heuristic_sort(cls, board, allMoves): #most non-zero neighbors
         def customFunc(board, move):
             x, y = move
             count = 0
@@ -143,7 +143,7 @@ class GameEngine:
                 for j in [-1, 0, 1]:
                     if 0 <= x+i < size and 0 <= y+j < size:
                         if board.matrix[x+i][y+j] != 0:
-                            count += 1
+                            count +=  1
             return count
 
         return sorted(allMoves, key=lambda move: customFunc(board, move), reverse=True)

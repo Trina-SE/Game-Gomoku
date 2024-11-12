@@ -65,7 +65,7 @@ class Board:
     #     return False
 
     
-    def generateMoves(self):
+    def generateMoves(self): #only adjacent
         moves = []
         for i in range(self.size):
             for j in range(self.size):
