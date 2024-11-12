@@ -1,12 +1,16 @@
 import numpy
 import pygame
+import time
+import math
 
 from gameBoard import Board
+from wincheck import WinCheck
+from gameEngine import GameEngine
 
 class GamePlay:
     def __init__(self, board:Board):
         self.gridSize = 60
-        self.edgeSize = 15
+        self.edgeSize = self.gridSize // 4
 
         self.scoreOfBlack = 0
         self.scoreOfWhite = 0
@@ -16,28 +20,28 @@ class GamePlay:
 
         self.board = board
         self.winChecker = WinCheck(board)
-        self.startX = 40
-        self.startY = 30
+        self.startX, self.startY  = 40,30
+        # self.startY = 30
         self.lastMove = None
 
 
-    def handlePlayer(self, event):
+    def handlePlayer(self, e):
         originX = self.startX - self.edgeSize
         originY = self.startY - self.edgeSize
-
         size = (self.board.size - 1) * self.gridSize + self.edgeSize * 2
-        position = event.pos
-
-        if originX <= position[0] <= originX+size and originY <= position[1] <= originY+size:
-            row = int((position[0]-originX)//self.gridSize)
-            column = int ((position[1]-originY)//self.gridSize)
-            self.setPiece(row, column)
-            self.isTurnOfBlack = not self.isTurnOfBlack
+        pos = e.pos
+        if originX <= pos[0] <= originX + size and originY <= pos[1] <= originY + size:
+            x = pos[0] - originX
+            y = pos[1] - originY
+            row = int(y // self.gridSize)
+            col = int(x // self.gridSize)
+            self.setPiece(row, col)
+        self.isTurnOfBlack = not self.isTurnOfBlack
 
     
     def handleAI(self, player):
         isBlack = player == 2
-        row, column = 1, 2
+        row, column = GameEngine.findNextMove(self.board, 3, isBlack)
         self.setPiece(row, column)
         self.isTurnOfBlack = not self.isTurnOfBlack
 
@@ -64,7 +68,7 @@ class GamePlay:
 
         # VERTICAL LINES
         for r in range(self.board.size):
-            y = self.starY + r * self.gridSize
+            y = self.startY + r * self.gridSize
             pygame.draw.line(screen, (255,255,255), [self.startX, y], [self.startX + self.gridSize * (self.board.size - 1), y], 2)
         
         # HORIZONTAL LINES

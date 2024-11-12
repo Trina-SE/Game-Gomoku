@@ -1,5 +1,7 @@
 import numpy
 import pygame
+import time
+import math
 
 
 class Board:

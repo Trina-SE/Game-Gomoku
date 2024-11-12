@@ -1,5 +1,6 @@
 import numpy
-
+import time
+import math
 
 class WinCheck:
     def __init__(self, board):
