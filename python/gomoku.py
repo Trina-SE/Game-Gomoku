@@ -5,6 +5,10 @@ PVP = "PlayerVsPlayer"
 PVA = "PlayerVsAI"
 AVA = "AIVsAI"
 
+class Player:
+    WHITE = 1
+    BLACK = 2
+
 
 class GoMokuUI():
     
