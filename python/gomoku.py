@@ -6,14 +6,11 @@ import math
 from gamePlay import GamePlay
 from gameEngine import GameEngine
 from gameBoard import Board
+from player import Player
 
 PVP = "PlayerVsPlayer"
 PVA = "PlayerVsAI"
 AVA = "AIVsAI"
-
-class Player:
-    WHITE = 1
-    BLACK = 2
 
 
 class GoMokuUI():
@@ -78,10 +75,10 @@ class GoMokuUI():
     def draw(self):
         self.screen.fill((255, 255, 255))
         # self.screen.blit(self.font.render("FPS: {0:.2F}".format(self.clock.get_fps()), True, (0, 0, 0)), (10, 10))
-        self.screen.blit(self.font.render("Black: {0}".format(self.game.scoreOfBlack), True, (0, 0, 0)), (10, self.height - 25))
-        self.screen.blit(self.font.render("White: {0}".format(self.game.white_score), True, (0, 0, 0)), (10, self.height - 50))
-        self.screen.blit(self.font.render("Calculation time: {0:0.2f}s".format(GameEngine.calculationTime), True, (0, 0, 0)), (10, self.height - 75))
-        self.screen.blit(self.font.render("Number of calculations: {0}".format(GameEngine.countEvaluation), True, (0, 0, 0)), (10, self.height - 100))
+        # self.screen.blit(self.font.render("Black: {0}".format(self.game.scoreOfBlack), True, (0, 0, 0)), (10, self.height - 25))
+        # self.screen.blit(self.font.render("White: {0}".format(self.game.white_score), True, (0, 0, 0)), (10, self.height - 50))
+        # self.screen.blit(self.font.render("Calculation time: {0:0.2f}s".format(GameEngine.calculationTime), True, (0, 0, 0)), (10, self.height - 75))
+        # self.screen.blit(self.font.render("Number of calculations: {0}".format(GameEngine.countEvaluation), True, (0, 0, 0)), (10, self.height - 100))
         self.screen.blit(self.font.render("Turn: {0}".format("Black" if self.game.isTurnOfBlack else "White"), True, (0, 0, 0)), (10, self.height - 125))
 
         self.game.drawBoard(self.screen)
