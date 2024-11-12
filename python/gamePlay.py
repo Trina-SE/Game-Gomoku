@@ -2,6 +2,7 @@ import numpy
 import pygame
 
 from gameBoard import Board
+from wincheck import WinCheck
 
 class GamePlay:
     def __init__(self, board:Board):
@@ -64,7 +65,7 @@ class GamePlay:
 
         # VERTICAL LINES
         for r in range(self.board.size):
-            y = self.starY + r * self.gridSize
+            y = self.startY + r * self.gridSize
             pygame.draw.line(screen, (255,255,255), [self.startX, y], [self.startX + self.gridSize * (self.board.size - 1), y], 2)
         
         # HORIZONTAL LINES
