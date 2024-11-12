@@ -95,3 +95,18 @@ class Board:
                         continue
         return moves
 
+
+    def draw(self, move, is_black):
+        color = 2 if is_black else 1
+        self.matrix[move] = color
+
+    def swap(self):
+        board = Board(matrix=self.matrix)
+        for i in range(board.size):
+            for j in range(board.size):
+                if board.matrix[i][j] == 1:
+                    board.matrix[i][j] = 2
+                elif board.matrix[i][j] == 2:
+                    board.matrix[i][j] = 1
+        return board
+
