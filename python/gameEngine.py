@@ -122,7 +122,7 @@ class GameEngine:
         if bestMove is not None:
             move = bestMove
         else:
-            value, bestMove = cls.minimax_alphabeta(board, depth, -1.0, 100000000, True)
+            value, bestMove = cls.minimax_alphabeta(board, depth, -1.0, 100000000, True) ##game state:ROOT
             if bestMove is None:
                 move = None
             else:
@@ -149,7 +149,7 @@ class GameEngine:
         return sorted(allMoves, key=lambda move: customFunc(board, move), reverse=True)
 
     @classmethod
-    def minimax_alphabeta(cls, board: Board, depth, alpha, beta, isMax):
+    def minimax_alphabeta(cls, board: Board, depth, alpha, beta, isMax): #game state
         if depth == 0:
             return (cls.evaluateBoard(board, not isMax), None)
 
